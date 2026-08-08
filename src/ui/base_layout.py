@@ -33,7 +33,7 @@ def style_base_layout():
         /*@import url('https://fonts.googleapis.com/css2?family=Climate+Crisis:YEAR@1979&family=Outfit:wght@100..900&family=Rubik+Mono+One&family=Syncopate:wght@400;700&display=swap');*/
         @import url('https://fonts.googleapis.com/css2?family=Climate+Crisis:YEAR@1979&family=Outfit:wght@100..900&display=swap');
 
-        
+           /*removed extra gap of streamlit*/
             #MainMenu, header, footer {
             visibility: hidden;
             }
@@ -47,7 +47,7 @@ def style_base_layout():
             font-size: 2.5rem !important;
             line-height: 1.1 !important;
             margin-bottom: 0rem !important;
-            color: #E0E3FF !important;
+            /* color: #E0E3FF !important; */
             }
 
             h2{
@@ -74,11 +74,17 @@ def style_base_layout():
 
             button[kind="secondary"]{
             border-radius: 1.5rem !important;
-            background: #EB459E !important;
-            color: white !important;
+            Background : Transparent;
+            Border     : 2px solid #5865F2 !important;
+            color       : #5865F2 !important;
             padding: 10px 20px !important;
-            border: none !important;
             transition: transform 0.25s ease-in-out !important;
+            }
+
+            button[kind="secondary"]:hover {
+            transform: scale(1.05)!important;
+            Background : #5865F2;
+            color : White !important;
             }
 
             button[kind="tertiary"]{
@@ -90,8 +96,11 @@ def style_base_layout():
             transition: transform 0.25s ease-in-out !important;
             }
 
-            button:hover{
+            button[kind="primary"]:hover{
             transform: scale(1.05)!important;
+            Background : Transparent !important;
+            Border     : 2px solid #5865F2 !important;
+            color       : #5865F2 !important;
             }
         </style>
 
