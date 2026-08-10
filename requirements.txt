@@ -15,3 +15,7 @@ segno # library for qr code generation
 pillow 
 
 streamlit
+
+librosa
+resemblyzer
+setuptools==81.0.0
