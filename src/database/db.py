@@ -38,4 +38,24 @@ def get_all_students():
     response = supabase.table("students").select("*").execute()
     return response.data
 
+def create_subject(subject_code, subject_name, section, teacher_id):
+    data = {"subject_code": subject_code, "name": subject_name, "section": section, "teacher_id": teacher_id}
+    response = supabase.table("subjects").insert(data).execute()
+    return response.data
 
+
+# Get all subjects, count enrolled students in each subject,
+# and get attendance records for each subject/student.
+def get_teacher_sub(teacher_id):
+    response = supabase.table("subjects").select("* , subject_student(count), attendence_logs(timestamp)").eq("teacher_id", teacher_id).execute()
+    subjects = response.data
+
+    for sub in subjects:
+        sub["total_students"] = sub['subject_student'][0]["count"]
+        attendence = sub['attendence_logs']
+        unique_session = set(log['timestamps'] for log in attendence)
+        sub["total_classes"] = len(unique_session)
+        sub.pop("subject_student", None)
+        sub.pop("attendence_logs", None)
+
+    return subjects

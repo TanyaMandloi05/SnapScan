@@ -2,7 +2,10 @@ import streamlit as st
 from src.ui.base_layout import style_base_layout , style_dashboard_layout
 from src.components.header import header_dashboard
 from src.components.footer import footer_dashboard
-from src.database.db import teacher_exists, create_teacher, teacher_login
+from src.components.dialog_create_subject import create_subject_dialog
+from src.components.subject_card import subject_card
+from src.database.db import teacher_exists, create_teacher, teacher_login, get_teacher_sub
+from src.components.dialog_share_subject import share_sub_dialog
 import time
 
 def teacher_screen():
@@ -63,6 +66,8 @@ def teacher_dashboard():
     if st.session_state.current_teacher_tab == 'attendence_records':
         teacher_tab_attendence_record()
 
+    footer_dashboard()
+
 
 def teacher_tab_take_attendence():
     st.header("take Ai attendence")
@@ -73,7 +78,28 @@ def teacher_tab_manage_subjects():
     with col1:
         st.header("Manage subjects")
     with col2:
-        st.button("create New Subject")
+        if st.button("create New Subject", width="stretch"):
+            create_subject_dialog(teacher_id)
+
+    subjects = get_teacher_sub(teacher_id)
+    if subjects:
+        for sub in subjects:
+            stats = [
+                 ("👨‍🎓", "Students", sub['total_students']),
+                ("🕰️", "Classes", sub['total_classes']),
+            ]
+        def sharebtn():
+            if st.button(f"Share Code: {sub['name']}", key=f"share_{sub['subject_code']}", icon=":material/share:"):
+                share_sub_dialog(sub['name'], sub['subject_code'])
+            st.space()
+
+        subject_card(
+            name = sub['name'],
+            code = sub['subject_code'],
+            section = sub['section'],
+            stats = stats,
+            footer_callback = sharebtn
+        )
 
 def teacher_tab_attendence_record():
     st.header("manage attendence")
