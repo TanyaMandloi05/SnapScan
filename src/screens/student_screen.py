@@ -24,7 +24,7 @@ def student_dashboard():
     with col2:
         st.header(f""" Welcome {student_data['name']}""")
         if st.button("Logout", key="loginbackbtn", shortcut="control+backspace"):
-            st.session_state['is_Logged_in'] = False
+            st.session_state['is_logged_in'] = False
             del st.session_state.student_data
             st.rerun()
         st.space()
