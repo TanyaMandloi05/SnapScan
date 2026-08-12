@@ -59,3 +59,21 @@ def get_teacher_sub(teacher_id):
         sub.pop("attendence_logs", None)
 
     return subjects
+
+def enroll_student_to_subject(student_id, subject_id):
+    data = {"student_id": student_id, "subject_id": subject_id}
+    response = supabase.table("subject_student").insert(data).execute()
+    return response.data
+
+def unenroll_student_to_subject(student_id, subject_id):
+    response = supabase.table("subject_student").delete().eq("student_id", student_id).eq("subject_id", subject_id).execute()
+    return response.data
+
+def get_student_subjects(student_id):
+    response = supabase.table('subject_student').select('*, subjects(*)').eq('student_id', student_id).execute()
+    return response.data
+
+
+def get_student_attendence(student_id):
+    response = supabase.table("attendence_logs").select("*, subjects(*)").eq("student_id", student_id).execute()
+    return response.data
