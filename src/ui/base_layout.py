@@ -34,13 +34,13 @@ def style_base_layout():
         @import url('https://fonts.googleapis.com/css2?family=Climate+Crisis:YEAR@1979&family=Outfit:wght@100..900&display=swap');
 
            /*removed extra gap of streamlit*/
-            /*#MainMenu, header, footer {
+            #MainMenu, header, footer {
             visibility: hidden;
             }
 
             .block-container{
             padding-top: 1.5rem;
-            }*/
+            }
 
             h1{
             font-family: 'Climate Crisis', sans-serif !important;

@@ -55,13 +55,15 @@ def process_bulk_audio(audio_bytes, candidate_dict, threshold=0.65):
 
             sid, score = identify_speaker(embedding, candidate_dict, threshold)
             if sid:
-                if sid not in identified_results and score > identified_results[sid]:
+                if sid not in identified_results:
                     identified_results[sid] = score
-
+                elif score > identified_results[sid]:
+                    identified_results[sid] = score
+                    
         return identified_results
 
     except Exception as e:
-        st.error("Bluk process error")
+        st.error(e)
         return {}
 
    

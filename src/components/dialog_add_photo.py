@@ -32,7 +32,7 @@ def add_photos_dialog():
             for f in uploaded_files:
                 st.session_state.attendence_image.append(Image.open(f))
             st.toast("Photos uploaded Successfully !!")
-            st.rerun()
+            # st.rerun()
 
     st.divider()
     if st.button("Done", type='primary', width="stretch"):

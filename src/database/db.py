@@ -2,6 +2,7 @@ from src.database.config import supabase
 import bcrypt
 
 
+
 def teacher_exists(username):
     response = supabase.table("teachers").select("username").eq("username", username).execute()
     return len(response.data)
@@ -53,7 +54,7 @@ def get_teacher_sub(teacher_id):
     for sub in subjects:
         sub["total_students"] = sub['subject_student'][0]["count"]
         attendence = sub['attendence_logs']
-        unique_session = set(log['timestamps'] for log in attendence)
+        unique_session = set(log['timestamp'] for log in attendence)
         sub["total_classes"] = len(unique_session)
         sub.pop("subject_student", None)
         sub.pop("attendence_logs", None)
@@ -77,3 +78,18 @@ def get_student_subjects(student_id):
 def get_student_attendence(student_id):
     response = supabase.table("attendence_logs").select("*, subjects(*)").eq("student_id", student_id).execute()
     return response.data
+
+def create_attendence(logs):
+    response = supabase.table("attendence_logs").insert(logs).execute()
+    return response.data
+
+def get_attendence_record(teacher_id):
+    subjects = (supabase.table("subjects").select("subject_id").eq("teacher_id", teacher_id).execute())
+    subject_ids = []
+
+    for subject in subjects.data:
+        subject_ids.append(subject["subject_id"])
+
+    attendance = supabase.table("attendence_logs").select("*, subjects(*), students(*)").in_("subject_id", subject_ids).execute() #check whether a value belongs to a list.
+    return attendance.data
+
