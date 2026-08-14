@@ -29,8 +29,7 @@ def style_dashboard_layout():
 def style_base_layout():
     st.markdown("""
         <style>
-        @import url('https://fonts.googleapis.com/css2?family=Climate+Crisis:YEAR@1979&family=Outfit:wght@100..900&display=swap');
-        /*@import url('https://fonts.googleapis.com/css2?family=Climate+Crisis:YEAR@1979&family=Outfit:wght@100..900&family=Rubik+Mono+One&family=Syncopate:wght@400;700&display=swap');*/
+        @import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Climate+Crisis:YEAR@1979&family=Outfit:wght@100..900&display=swap');
 
            /*removed extra gap of streamlit*/
@@ -43,7 +42,7 @@ def style_base_layout():
             }
 
             h1{
-            font-family: 'Climate Crisis', sans-serif !important;
+            font-family: 'Lilita One', cursive !important;
             font-size: 2.5rem !important;
             line-height: 1.1 !important;
             margin-bottom: 0rem !important;
@@ -51,7 +50,7 @@ def style_base_layout():
             }
 
             h2{
-            font-family: 'Climate Crisis', sans-serif !important;
+            font-family: 'Lilita One', cursive !important;
             font-size: 2rem !important;
             line-height: 1.1 !important;
             margin-bottom: 0rem !important;
